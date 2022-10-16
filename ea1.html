@@ -5,6 +5,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="dino.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">
@@ -41,6 +42,12 @@
 
 							<h2> Erweiterung 2</h2>
 							<p>Außer einer Scheibe kreieren und animieren Sie noch ein anderes Objekt Ihrer Wahl als Sprite-Sheet, z. B. einen hüpfenden Hasen.</p>
+							<h3>Fahren Sie mit der Maus über das Bild, und sehen Sie den Dinosaurier springen!</h3>
+							<div id="demo">
+								<p id="dino" onmouseover="animateScript()" onmouseout="stopAnimate()">
+							  </p>
+							  <h5>Bild-source:https://learn.adafruit.com/makecode-arcade-pixel-animation/sprite-animation-fundamentals</h5>
+							  </div>
 						</div>
 					</section>
 
@@ -56,6 +63,7 @@
 			<script src="assets/js/main.js"></script>
 			<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 			<script src="assets/js/ea1.js"></script>
+			<script src="assets/js/dino.js"></script>
 
 	</body>
 </html>
