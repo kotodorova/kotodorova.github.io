@@ -87,7 +87,7 @@ var colors = [0.196,0.133,0.035, //1
      // Create an empty buffer object and store Index data
      var Index_Buffer = gl.createBuffer();
      gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, Index_Buffer);
-     gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), gl.STATIC_DRAW);
+     gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), gl.DYNAMIC_DRAW);
      gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
 
      // Create an empty buffer object and store color data
