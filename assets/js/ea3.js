@@ -1,8 +1,8 @@
 function main() {
     const canvas = document.querySelector("#myCanvas");
     // Initialize the GL context
-    const gl = canvas.getContext("webgl");
-  
+    const gl = canvas.getContext('experimental-webgl');
+
     // Only continue if WebGL is available and working
     if (gl === null) {
       alert("Unable to initialize WebGL. Your browser or machine may not support it.");
@@ -97,102 +97,102 @@ var colors = [0.196,0.133,0.035, //1
 
      /*======================= Shaders =======================*/
      
-     // vertex shader source code
-     var vertCode = 'attribute vec3 coordinates;'+
-        'attribute vec3 color;'+
-        'varying vec3 vColor;'+
-        'void main(void) {' +
-           ' gl_Position = vec4(coordinates, 1.0);' +
-           'vColor = color;'+
-        '}';
-        
-     // Create a vertex shader object
-     var vertShader = gl.createShader(gl.VERTEX_SHADER);
+    // vertex shader source code
+		var vertCode = 'attribute vec3 coordinates;' +
+			'attribute vec3 color;' +
+			'varying vec3 vColor;' +
+			'void main(void) {' +
+			' gl_Position = vec4(coordinates, 1.0);' +
+			'vColor = color;' +
+			'}';
 
-     // Attach vertex shader source code
-     gl.shaderSource(vertShader, vertCode);
+		// Create a vertex shader object
+		var vertShader = gl.createShader(gl.VERTEX_SHADER);
 
-     // Compile the vertex shader
-     gl.compileShader(vertShader);
+		// Attach vertex shader source code
+		gl.shaderSource(vertShader, vertCode);
+
+		// Compile the vertex shader
+		gl.compileShader(vertShader);
 
 
-     // fragment shader source code
-     var fragCode = 'precision mediump float;'+
-        'varying vec3 vColor;'+
-        'void main(void) {'+
-           'gl_FragColor = vec4(vColor, 1.);'+
-        '}';
-        
-     // Create fragment shader object
-     var fragShader = gl.createShader(gl.FRAGMENT_SHADER);
+		// fragment shader source code
+		var fragCode = 'precision mediump float;' +
+			'varying vec3 vColor;' +
+			'void main(void) {' +
+			'gl_FragColor = vec4(vColor, 1.);' +
+			'}';
 
-     // Attach fragment shader source code
-     gl.shaderSource(fragShader, fragCode);
+		// Create fragment shader object
+		var fragShader = gl.createShader(gl.FRAGMENT_SHADER);
 
-     // Compile the fragmentt shader
-     gl.compileShader(fragShader);
+		// Attach fragment shader source code
+		gl.shaderSource(fragShader, fragCode);
 
-     // Create a shader program object to
-     // store the combined shader program
-     var shaderProgram = gl.createProgram();
+		// Compile the fragmentt shader
+		gl.compileShader(fragShader);
 
-     // Attach a vertex shader
-     gl.attachShader(shaderProgram, vertShader);
+		// Create a shader program object to
+		// store the combined shader program
+		var shaderProgram = gl.createProgram();
 
-     // Attach a fragment shader
-     gl.attachShader(shaderProgram, fragShader);
+		// Attach a vertex shader
+		gl.attachShader(shaderProgram, vertShader);
 
-     // Link both the programs
-     gl.linkProgram(shaderProgram);
+		// Attach a fragment shader
+		gl.attachShader(shaderProgram, fragShader);
 
-     // Use the combined shader program object
-     gl.useProgram(shaderProgram);
+		// Link both the programs
+		gl.linkProgram(shaderProgram);
 
-     /* ======== Associating shaders to buffer objects =======*/
+		// Use the combined shader program object
+		gl.useProgram(shaderProgram);
 
-     // Bind vertex buffer object
-     gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
+		/* ======== Associating shaders to buffer objects =======*/
 
-     // Bind index buffer object
-     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, Index_Buffer);
+		// Bind vertex buffer object
+		gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
 
-     // Get the attribute location
-     var coord = gl.getAttribLocation(shaderProgram, "coordinates");
+		// Bind index buffer object
+		gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, Index_Buffer);
 
-     // point an attribute to the currently bound VBO
-     gl.vertexAttribPointer(coord, 3, gl.FLOAT, false, 0, 0);
+		// Get the attribute location
+		var coord = gl.getAttribLocation(shaderProgram, "coordinates");
 
-     // Enable the attribute
-     gl.enableVertexAttribArray(coord);
+		// point an attribute to the currently bound VBO
+		gl.vertexAttribPointer(coord, 3, gl.FLOAT, false, 0, 0);
 
-     // bind the color buffer
-     gl.bindBuffer(gl.ARRAY_BUFFER, color_buffer);
-     
-     // get the attribute location
-     var color = gl.getAttribLocation(shaderProgram, "color");
+		// Enable the attribute
+		gl.enableVertexAttribArray(coord);
 
-     // point attribute to the volor buffer object
-     gl.vertexAttribPointer(color, 3, gl.FLOAT, false,0,0) ;
+		// bind the color buffer
+		gl.bindBuffer(gl.ARRAY_BUFFER, color_buffer);
 
-     // enable the color attribute
-     gl.enableVertexAttribArray(color);
+		// get the attribute location
+		var color = gl.getAttribLocation(shaderProgram, "color");
 
-     /*============Drawing the Quad====================*/
+		// point attribute to the volor buffer object
+		gl.vertexAttribPointer(color, 3, gl.FLOAT, false, 0, 0);
 
-     // Clear the canvas
-     gl.clearColor(0.97, 0.94, 0.69, 0.9);
+		// enable the color attribute
+		gl.enableVertexAttribArray(color);
 
-     // Enable the depth test
-     gl.enable(gl.DEPTH_TEST);
+		/*============Drawing the Quad====================*/
 
-     // Clear the color buffer bit
-     gl.clear(gl.COLOR_BUFFER_BIT);
+		// Clear the canvas
+		gl.clearColor(1, 1, 1, 1);
 
-     // Set the view port
-     gl.viewport(0,0,canvas.width,canvas.height);
+		// Enable the depth test
+		gl.enable(gl.DEPTH_TEST);
 
-     //Draw the triangle
-     gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT,0);
+		// Clear the color buffer bit
+		gl.clear(gl.COLOR_BUFFER_BIT);
+
+		// Set the view port
+		gl.viewport(0, 0, canvas.width, canvas.height);
+
+		//Draw the triangle
+		gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
   }
   
   window.onload = main;
