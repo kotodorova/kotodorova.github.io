@@ -44,15 +44,3 @@ const images = [
         console.log("R.");
       }
     });
-
-    document.addEventListener("keydown", function (event) {
-        if (event.keyCode ==97) {
-            index++;
-            console.log(index);
-          }
-          document.getElementById("images").src = images[index];
-          console.log("R.");
-        }
-      );
-
-    
