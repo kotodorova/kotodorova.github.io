@@ -2,7 +2,7 @@ var rec_ball = ( function() {
 
 	function createVertexData() {
 		var rekursionsStuffe = document.getElementById('rek').value;
-
+		
 		//drei Komponenten vektor
 		var newVec3 = function(x,y,z) {
 			return {
