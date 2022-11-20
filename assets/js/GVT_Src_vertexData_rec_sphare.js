@@ -15,7 +15,7 @@ var rec_ball = ( function() {
 			}
 		}
 
-		//Normalisierung eines Vektors (eine Länge von 1)
+		//Vektor normalisieren- Länge 1
 		var normalize = function(vec) {
 			var len = Math.sqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z);
 			return newVec3(vec.x / len, vec.y / len, vec.z / len);
@@ -24,7 +24,7 @@ var rec_ball = ( function() {
 		var corners = [];
 		var surfaces = [];
 
-		//Erstellen eines Grundkörpers
+		//eines Grundkörpers erstellen
 		corners.push(normalize(newVec3( 0, -1,  0)));
 		corners.push(normalize(newVec3(-1,  0,  1)));
 		corners.push(normalize(newVec3( 1,  0,  1)));
@@ -41,7 +41,7 @@ var rec_ball = ( function() {
         surfaces.push(newVec3(3, 4, 5));
         surfaces.push(newVec3(4, 1, 5));
 		
-		//Algorithmus der Mittelpunkt zwischen 2 Punkten berechnet; 
+		//Algorithmus der Mittelpunkt zwischen 2 Punkten berechnen; 
 		var centrePointCalculate = function(p1, p2) {
 			var pkt1 = corners[p1];
 			var pkt2 = corners[p2];
@@ -49,7 +49,7 @@ var rec_ball = ( function() {
 										(pkt1.y + pkt2.y) / 2,
 										(pkt1.z + pkt2.z) / 2);
 			corners.push(normalize(centrepoint));
-			return corners.length - 1;//neuen Punkt Nummer zurückgeben
+			return corners.length - 1;
 		}
 
 		//Rekursive Berechnung der neuen Punkte und Flächen
@@ -86,7 +86,7 @@ var rec_ball = ( function() {
 		this.indicesTris = new Uint16Array(3 * surfaces.length);
 		var indicesTris = this.indicesTris;
 
-		//Überstragung der Ecken ins vertices Array und normalen Array
+		
 		for (var i = 0; i < corners.length; i++)
 		{
 			vertices[i * 3]     = corners[i].x;
@@ -98,7 +98,7 @@ var rec_ball = ( function() {
 			normals[i * 3 + 2] = corners[i].z;
 		}
 
-		//Übertragung der Fläschen zu der indicies Arrays für Linien und Dreiecke
+		//Fläschen zu der indicies Arrays für Linien und Dreiecke übertragung
 		for (var i = 0; i < surfaces.length; i++)
 		{
 			indicesLines[i * 6]     = surfaces[i].a;
