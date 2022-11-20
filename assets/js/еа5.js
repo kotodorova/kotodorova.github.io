@@ -53,7 +53,7 @@ var app = ( function() {
 
 	function initWebGL() {
 		// Get canvas and WebGL context.
-		canvas = document.getElementById('canvas');
+		canvas = document.getElementById('canvas5');
 		gl = canvas.getContext('experimental-webgl');
 		gl.viewportWidth = canvas.width;
 		gl.viewportHeight = canvas.height;
@@ -71,6 +71,7 @@ var app = ( function() {
 		// Backface culling.
 		gl.frontFace(gl.CCW);
 		gl.enable(gl.CULL_FACE);
+		gl.enable(gl.SCISSOR_TEST);
 		gl.cullFace(gl.BACK);
 
 		// Depth(Z)-Buffer.
@@ -354,5 +355,4 @@ var app = ( function() {
 	return {
 		start : start
 	}
-
 }());
