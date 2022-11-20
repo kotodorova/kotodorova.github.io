@@ -42,7 +42,7 @@
 		<script src="assets/js/GVT_Src_vertexData_torus.js"></script>
 		<script src="assets/js/GVT_Src_vertexData_ball.js"></script>
 		<script src="assets/js/GVT_Src_vertexData_rec_sphare.js"></script>
-		<script src="assets/js/KAP_Src_tpl.js"></script>
+		<script src="assets/js/еа5.js"></script>
 		<script type="x-shader/x-vertex" id="vertexshader">
 			attribute vec3 aPosition;
 			attribute vec3 aNormal;
@@ -75,7 +75,7 @@
 						<div class="card-content">
 					<h3>Rekursionseinstellung:</h3>
 					<p>Stellen Sie mit den Ziffern von 0 bis 7 die Rekursionsstuffen des Kugels in der Mitte ein:</p>
-					<input type="number" id="rek" min="0" max="7" step="1" value="2" pattern="[0-7]*"autocomplete="off">
+					<input type="number" id="rek" min="0" max="7" step="1" value="2" pattern="[0-7]*"onClick="rec_ball.createVertexData()" autocomplete="off">
 					<button id="rekBtn">Berechne</button>
 						</div>
 						</div>
