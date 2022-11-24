@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="subdir/assets/js/jquery.min.js"></script>
+		<script src="subdir/assets/js/jquery.scrollex.min.js"></script>
+		<script src="subdir/assets/js/jquery.scrolly.min.js"></script>
+		<script src="subdir/assets/js/browser.min.js"></script>
+		<script src="subdir/assets/js/breakpoints.min.js"></script>
+        <script type="text/javascript" src="ext/gl-matrix.js"></script>
+        <script type="text/javascript" src="js/GVT_Src_vertexData_sphere.js"></script>
+        <script type="text/javascript" src="js/GVT_Src_vertexData_torus.js"></script>
+        <script type="text/javascript" src="js/GVT_Src_vertexData_plane.js"></script>
+        <script type="text/javascript" src="js/ea6.js"></script>
+        <script type="x-shader/x-vertex" id="vertexshader">
+            attribute vec3 aPosition;
+            attribute vec3 aNormal;
+
+            uniform mat4 uPMatrix;
+            uniform mat4 uMVMatrix;
+            uniform mat3 uNMatrix;
+            uniform vec4 uColor;
+
+            varying vec4 vColor;
+
+            void main(){
+                gl_Position = uPMatrix * uMVMatrix * vec4(aPosition, 1.0);
+                vec3 tNormal = uNMatrix * aNormal;
+
+                vColor = vec4(tNormal.x, tNormal.y, tNormal.z, 1.0);
+                vColor = uColor * (vColor + 1.0) / 2.0;
+            }
+        </script>
+        <script type="x-shader/x-fragment" id="fragmentshader">
+            precision mediump float;
+            varying vec4 vColor;
+
+            void main() {
+                gl_FragColor = vColor;
+            }
+        </script>
+        <title>EA 6 - Objekte bewegen</title>
+		
+		<meta charset="utf-8" />
+		
+		<link rel="stylesheet" href="assets/css/main.css"/>
+		<noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
+    </head>
+    <body onload="app.start()" class="is-preload">
+		<div class="wrapper">
+			<header id="header">
+				<a href="index.html" class="title">Kosara Todorova</a>
+				<nav>
+					<ul>
+						<li><a href="../index.html">Home</a></li>
+						<li><a href="../ea1.html" class="active">EA1</a></li>
+						<li><a href="../generic.html" class="active">EA2</a></li>
+						<li><a href="../ea3.html" class="active">EA3</a></li>
+						<li><a href="../ea4.html" class="active">EA4</a></li>
+						<li><a href="../ea5.html" class="active">EA5</a></li>
+						<li><a href="../ea6.html" class="active">EA6</a></li>
+					</ul>
+				</nav>
+			</header>
+<!-- Wrapper -->
+<div id="wrapper">
+
+	<!-- Main -->
+		<section id="main" class="wrapper">
+			<div class="inner">
+				<h1 class="major">EA 6 - Objekte bewegen - fliegende Kugeln </h1>
+                <h2>Interaktion</h2>
+
+						<div class="card-content">
+					<h3>Interaktion:</h3>
+					<p>Drücken Sie die Taste <b>k</b>, damit sich alle Kugeln ein Stück weiter bewegen und durch den Torus fliegen. </p>
+		<canvas id="canvas" width="500" height="500" ></canvas>
+        <span><img src="../EA 6/image/controls.png" width="500" height="500" alt="" /></span>
+		
+		<div class="col-7-large">
+					
+			</div>
+		</div>
+	</div>
+		</section>
+</div>	
+</body>
+</html>
