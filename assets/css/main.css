@@ -14,7 +14,7 @@ small, strike, strong, sub, sup, tt, var, b,
 u, i, center, dl, dt, dd, ol, ul, li, fieldset,
 form, label, legend, table, caption, tbody,
 tfoot, thead, tr, th, td, article, aside,
- details, embed, figure, figcaption,
+canvas, details, embed, figure, figcaption,
 footer, header, hgroup, menu, nav, output, ruby,
 section, summary, time, mark, audio, video {
 	margin: 0;
@@ -3187,6 +3187,76 @@ input, select, textarea {
 			}
 
 		}
+
+		.wrapper.fade-up > section {
+			display: -moz-flex;
+			display: -webkit-flex;
+			display: -ms-flex;
+			display: flex;
+			-moz-flex-direction: row;
+			-webkit-flex-direction: row;
+			-ms-flex-direction: row;
+			flex-direction: row;
+			min-height: 22.5em;
+		}
+	
+			body.is-ie .wrapper.fade-up > section {
+				min-height: 0;
+			}
+	
+			.spotlights > section > .image {
+				background-position: center center;
+				background-size: cover;
+				border-radius: 0;
+				display: block;
+				position: relative;
+				width: 25em;
+			}
+	
+			.wrapper.fade-up > section > .content {
+				padding: 4em 5em 2em 5em ;
+				display: -moz-flex;
+				display: -webkit-flex;
+				display: -ms-flex;
+				display: flex;
+				-moz-flex-direction: column;
+				-webkit-flex-direction: column;
+				-ms-flex-direction: column;
+				flex-direction: column;
+				-moz-justify-content: center;
+				-webkit-justify-content: center;
+				-ms-justify-content: center;
+				justify-content: center;
+				width: 50em;
+				-ms-flex: 1;
+			}
+	
+			wrapper.fade-up > section > .content > .inner {
+					-moz-transform: translateX(0) translateY(0);
+					-webkit-transform: translateX(0) translateY(0);
+					-ms-transform: translateX(0) translateY(0);
+					transform: translateX(0) translateY(0);
+					-moz-transition: opacity 1s ease, -moz-transform 1s ease;
+					-webkit-transition: opacity 1s ease, -webkit-transform 1s ease;
+					-ms-transition: opacity 1s ease, -ms-transform 1s ease;
+					transition: opacity 1s ease, transform 1s ease;
+					opacity: 1;
+				}
+	
+			
+				wrapper.fade-up > section.inactive > .image:before,
+			body.is-preload wrapper.fade-up > section > .image:before {
+				opacity: 1;
+			}
+	
+			wrapper.fade-up > section.inactive > .content > .inner,
+			body.is-preload wrapper.fade-up > section > .content > .inner {
+				-moz-transform: translateX(-1em);
+				-webkit-transform: translateX(-1em);
+				-ms-transform: translateX(-1em);
+				transform: translateX(-1em);
+				opacity: 0;
+			}
 
 /* Table */
 
