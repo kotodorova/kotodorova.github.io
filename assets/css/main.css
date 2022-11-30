@@ -3210,7 +3210,7 @@ input, select, textarea {
 				border-radius: 0;
 				display: block;
 				position: relative;
-				width: 25em;
+				width: 500px;
 			}
 	
 			.wrapper.fade-up > section > .content {
@@ -3230,6 +3230,8 @@ input, select, textarea {
 				width: 50em;
 				-ms-flex: 1;
 			}
+
+			
 	
 			wrapper.fade-up > section > .content > .inner {
 					-moz-transform: translateX(0) translateY(0);
