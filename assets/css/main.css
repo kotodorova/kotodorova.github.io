@@ -3142,6 +3142,14 @@ input, select, textarea {
 			opacity: 0;
 		}
 
+		.wrapper.fade-up > section > .image {
+			background-position: center center;
+			background-size: cover;
+			border-radius: 0;
+			display: block;
+			position: relative;
+			width: 35em;
+		}
 		@media screen and (max-width: 1680px) {
 
 			.spotlights > section > .content {
@@ -3199,20 +3207,14 @@ input, select, textarea {
 			flex-direction: row;
 			min-height: 22.5em;
 		}
+
+		
 	
 			body.is-ie .wrapper.fade-up > section {
 				min-height: 0;
 			}
 	
-			.spotlights > section > .image {
-				background-position: center center;
-				background-size: cover;
-				border-radius: 0;
-				display: block;
-				position: relative;
-				width: 500px;
-			}
-	
+			
 			.wrapper.fade-up > section > .content {
 				padding: 4em 5em 2em 5em ;
 				display: -moz-flex;
