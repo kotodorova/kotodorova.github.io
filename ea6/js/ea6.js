@@ -137,7 +137,7 @@ var app = ( function() {
 	function initModels() {
 		// fillstyle
 		var fs = "fillwireframe";
-		createModel("torus", fs, [1, 1, 1, 1], [0, .8, 0], [0, 0, 0], [1, 1, 1]);
+		createModel("torus", fs,  [ 0.23, 0.65, 0.76, 0.49 ], [x, y, z], [0, 0, 0], [.15, .15, .15]);
 		createModel("plane", "wireframe", [1, 0.65, 0.89, 0.95], [0, 0, 0], [0, 0, 0], [1, 1, 1]);
 		initSpheres('sphere', fs);
 	
