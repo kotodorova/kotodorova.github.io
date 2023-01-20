@@ -1,0 +1,156 @@
+<!DOCTYPE html5>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<script src="subdir/assets/js/jquery.min.js"></script>
+		<script src="subdir/assets/js/jquery.scrollex.min.js"></script>
+		<script src="subdir/assets/js/jquery.scrolly.min.js"></script>
+		<script src="subdir/assets/js/browser.min.js"></script>
+		<script src="subdir/assets/js/breakpoints.min.js"></script>
+
+    <script src="ext/gl-matrix.js"></script>
+    <script src="ext/papaparse.min.js"></script>
+
+    <!--NEW DIM-->
+    <script src="ext/tsne.js"></script>
+
+    <script src="GVT_Src_vertexData_sphere.js"></script>
+
+    <!--NEW DIM-->
+    <script src="DIM_Src_Data_tpl.js"></script>
+    <script src="DIM_Src_tpl.js"></script>
+
+    <script type="x-shader/x-vertex" id="vertexshader">
+			attribute vec3 aPosition;
+			attribute vec3 aNormal;
+
+			uniform mat4 uPMatrix;
+			uniform mat4 uMVMatrix;
+			uniform mat3 uNMatrix;
+
+			varying vec3 vNormal;
+
+			void main(){
+				// Calculte vertex position in eye coordinates. 
+				vec4 tPosition = uMVMatrix * vec4(aPosition, 1.0);
+				// Calculate projektion.
+				gl_Position = uPMatrix * tPosition;
+	
+				vec3 tNormal = normalize(uNMatrix * aNormal);
+				tNormal = uNMatrix * aNormal;
+				
+				vNormal = tNormal;
+			}
+
+    </script>
+    <script type="x-shader/x-fragment" id="fragmentshader">
+			precision mediump float;
+
+			varying vec3 vNormal;
+
+			// Material.
+			struct PhongMaterial {
+				vec3 ka;
+				vec3 kd;
+				vec3 ks;
+				float ke;
+			};
+			uniform PhongMaterial material;
+
+			// Ambient light.
+			uniform vec3 ambientLight;
+
+			vec3 camLight(vec3 n) {
+
+				vec3 ambient = material.ka * ambientLight;
+
+				vec3 s = vec3(0,0,1);
+				float sn = max( dot(s,n), 0.0);
+				vec3 diffuse = material.kd * sn;
+
+				return ambient + diffuse;
+			}
+
+			void main() {
+				vec3 vNormal = normalize(vNormal);
+				gl_FragColor = vec4(camLight(vNormal), 1.0);
+			}
+
+    </script>
+	<title>EA 10 - Seeds Daten in 3D </title>
+	<link rel="stylesheet" href="assets/css/main.css"/>
+		<noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
+</head>
+<body onload="app.start()">
+	<div class="wrapper">
+		<header id="header">
+			<a href="https://kotodorova.github.io/index.html" class="title">Kosara Todorova</a>
+			<nav>
+				<ul>
+					<li><a href="https://kotodorova.github.io/index.html">Home</a></li>
+					<li><a href="https://kotodorova.github.io/ea1.html" class="active">EA1</a></li>
+					<li><a href="https://kotodorova.github.io/generic.html" class="active">EA2</a></li>
+					<li><a href="https://kotodorova.github.io/ea3.html" class="active">EA3</a></li>
+					<li><a href="https://kotodorova.github.io/ea4.html" class="active">EA4</a></li>
+					<li><a href="https://kotodorova.github.io/ea5.html" class="active">EA5</a></li>
+					<li><a href="https://kotodorova.github.io/ea6/ea6.html" class="active">EA6</a></li>
+					<li><a href="https://kotodorova.github.io/ea7/ea7.html" class="active">EA7</a></li>
+					<li><a href="https://kotodorova.github.io/ea8/ea8.html" class="active">EA8</a></li>
+					<li><a href="https://kotodorova.github.io/ea9/ea9.html" class="active">EA9</a></li>
+					<li><a href="https://kotodorova.github.io/ea10/ea10.html" class="active">EA10</a></li>
+				</ul>
+			</nav>
+		</header>
+		<div id="wrapper">
+
+			<!-- Main -->
+				<section id="main" class="wrapper">
+					<div class="inner">
+						<h1 class="major">EA 10 - Seeds Daten in 3D </h1>
+
+	<div style="float: left; padding: 20px;">
+		<canvas id="canvas" width="500" height="500"></canvas>
+		<br/>
+		<span id="experiment"></span>
+		<span id="para"></span>
+		<span id="step"></span>
+	</div>
+<div class="wrapper" style="margin-left: 560; padding: 20px">
+	<div id="container" class="container">
+		<div class="col s12">
+			<div class="card">
+
+				<div class="card-content">
+					<!--Content-->
+
+					<h2><strong>Kamerabewegungen</strong></h2>
+					<ul>
+					<li>O: Orthogonale Ansicht. Mit den Tasten <b>B</b> und <b>Shift+B</b> - Zoom In und Zoom Out</li>
+					<li>F: Frustum-Ansicht. Mit den Tasten <b>B</b> und <b>Shift+B</b> - Zoom In und Zoom Out</li>
+					<li>P: Perspektivischen Ansicht. Mit den Tasten <b>V</b> und <b>Shift+V </b>- Zoom In und Zoom Out.</li>
+					<li>W: Bewegt die Kamera nach oben.</li>
+					<li>S: Bewegt die Kamera nach unten.</li>
+					<li>A und D: Kamera fährt hin und her auf der X-Axe.</li> 
+					<li>Space: Entfernt die von den Daten. Mit <b>Shift</b> nähern sie sich wieder.</li> 
+					<li>X, Y und Z: Rotiert die Kamera um die jeweilig Achse. </li>
+					<li>V: Kamerabewegungen im Bogenmaß. Mit Shift+V wird die Bewegung in entgegengesetzte Richtung ausgeführt.</li>
+					<li>B: Verkleinert die Abmessungen der erfasten Datenpunkt.</li>
+					</ul>
+
+					<h4><u>Daten:</u></h4>
+					<ul>
+						<li> L: Lade einen Datensatz von deiner Festplatte. </li>
+						<li> T: Führe eine t-SNE-Iteration aus. </li>
+						<li> K: Speicher die aktuell gezeigten Daten auf deiner Festplatte. </li>
+						
+					</ul>
+
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+	</div>
+</body>
+</html>
